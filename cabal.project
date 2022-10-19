@@ -17,7 +17,7 @@ repository cardano-haskell-packages
     d4a35cd3121aa00d18544bb0ac01c3e1691d618f462c46129271bccf39f7e8ee
 
 -- Bump this if you need newer packages from CHaP
-index-state: cardano-haskell-packages 2022-10-10T00:00:00Z
+index-state: cardano-haskell-packages 2022-10-17T00:00:00Z
 
 -- We never, ever, want this.
 write-ghc-environment-files: never
