@@ -10,9 +10,11 @@
       devShell = pkgs.stdenv.mkDerivation {
         src = self;
         name = "devshell";
-        buildInputs = [
-          pkgs.haskell.packages.ghc94.ghc
-          pkgs.haskell.packages.ghc94.cabal-install
+        buildInputs = with pkgs.haskell.packages.ghc94; [
+          ghc
+          cabal-install
+          hpack
+          haskell-language-server
         ];
       };
     };
