@@ -3,6 +3,7 @@
 
   outputs = { self, nixpkgs }:
     let pkgs = nixpkgs.legacyPackages.x86_64-linux; in
+    let hpkgs = pkgs.haskell.packages.ghc92; in
 
     {
       devShells.x86_64-linux.default = self.devShell;
