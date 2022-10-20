@@ -6,7 +6,11 @@ version: 0.0.1
 dependencies:
   - base
   - bytestring
+  - data-default
+  - either
   - text
+  - plutus-core
+  - plutus-ledger-api
   - plutarch
 
 library:
