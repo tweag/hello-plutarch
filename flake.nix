@@ -10,11 +10,16 @@
       devShell = pkgs.stdenv.mkDerivation {
         src = self;
         name = "devshell";
-        buildInputs = with pkgs.haskell.packages.ghc94; [
-          ghc
-          cabal-install
-          hpack
-          haskell-language-server
+        buildInputs = [
+          ## Haskell Packages
+          hpkgs.ghc
+          hpkgs.cabal-install
+          hpkgs.hpack
+          hpkgs.haskell-language-server
+          ## Nixpkgs
+          pkgs.pkg-config ## required to find system packages
+          pkgs.libsodium ## required by `cardano-crypto-class` (at least)
+          pkgs.secp256k1 ## required by `cardano-crypto-class` (at least)
         ];
       };
     };
