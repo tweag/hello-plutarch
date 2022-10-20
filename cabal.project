@@ -35,8 +35,21 @@ source-repository-package
   tag: 8bb883cd39f35f405b5ee856d96d735d5ebfb65c
   subdir:
     plutus-core
-    plutus-ledger-api
     plutus-tx
+
+-- Plutus Repository -- Personal Fork
+--
+-- FIXME: Plutarch uses `PlutusLedgerApi.Script` which has been removed from
+-- the Plutus repository. This fork reverts the commit in question. One should
+-- get rid of the fork as soon as Plutarch gets updated to either use `plutus`
+-- or `plutus-apps`.
+--
+source-repository-package
+  type: git
+  location: https://github.com/Niols/plutus
+  tag: f0b60105da2371258188ec3447fa1d44186502d0
+  subdir:
+    plutus-ledger-api
 
 -- Plutarch
 --
@@ -49,6 +62,12 @@ source-repository-package
   type: git
   location: https://github.com/plutonomicon/plutarch-plutus
   tag: v1.2.0
+
+-- Plutarch builds with `-Werror` but does have warnings. We disable this
+-- behaviour locally by making warnings warnings again.
+--
+package plutarch
+  ghc-options: -Wwarn
 
 -- Ignore upper bounds on some packages.
 allow-newer:
