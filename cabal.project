@@ -1,7 +1,7 @@
 packages: ./.
 
 -- Bump this if you need newer packages from Hackage
-index-state: 2022-09-26T00:00:00Z
+index-state: 2022-10-22T00:00:00Z
 
 -- Cardano Haskell Package Repository (CHaP)
 -- cf https://input-output-hk.github.io/cardano-haskell-packages

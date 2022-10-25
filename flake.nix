@@ -27,11 +27,6 @@
               hpack = {};
               haskell-language-server = {};
             };
-            shell.buildInputs = with pkgs; [
-              pkg-config  # May not be required
-              libsodium   # May not be required
-              secp256k1   # May not be required
-            ];
           };
         })
       ];
