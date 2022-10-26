@@ -57,9 +57,6 @@ source-repository-package
 --
 --     https://github.com/plutonomicon/plutarch-plutus
 --
--- FIXME: We are now using a fixed commit. Sometime in the future, one should
--- try to depend on a git tag. Even better, Plutarch might join CHaP one day.
---
 source-repository-package
   type: git
   location: https://github.com/plutonomicon/plutarch-plutus
