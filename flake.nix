@@ -17,7 +17,7 @@
         hello-plutarch =
           final.haskell-nix.project' {
             src = ./.;
-            compiler-nix-name = "ghc923";
+            compiler-nix-name = "ghc924";
             inputMap = {
               "https://input-output-hk.github.io/cardano-haskell-packages" = CHaP;
             };
