@@ -9,6 +9,7 @@ dependencies:
   - data-default
   - either
   - text
+  - plutus-tx
   - plutus-core
   - plutus-ledger-api
   - plutarch
