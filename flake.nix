@@ -1,27 +1,35 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
-
-  outputs = { self, nixpkgs }:
-    let pkgs = nixpkgs.legacyPackages.x86_64-linux; in
-    let hpkgs = pkgs.haskell.packages.ghc92; in
-
-    {
-      devShells.x86_64-linux.default = self.devShell;
-
-      devShell = pkgs.stdenv.mkDerivation {
-        src = self;
-        name = "devshell";
-        buildInputs = [
-          ## Haskell Packages
-          hpkgs.ghc
-          hpkgs.cabal-install
-          hpkgs.hpack
-          hpkgs.haskell-language-server
-          ## Nixpkgs
-          pkgs.pkg-config ## required to find system packages
-          pkgs.libsodium ## required by `cardano-crypto-class` (at least)
-          pkgs.secp256k1 ## required by `cardano-crypto-class` (at least)
-        ];
-      };
+  inputs = {
+    haskellNix.url = "github:input-output-hk/haskell.nix";
+    nixpkgs.follows = "haskellNix/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    # See https://input-output-hk.github.io/cardano-haskell-packages/
+    CHaP = {
+      url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
+      flake = false;
     };
+  };
+  outputs = { self, haskellNix, nixpkgs, flake-utils, CHaP }:
+  flake-utils.lib.eachSystem [ "x86_64-linux" ](system:
+    let
+      overlays = [ haskellNix.overlay
+      (final: prev: {
+        hello-plutarch =
+          final.haskell-nix.project' {
+            src = ./.;
+            compiler-nix-name = "ghc924";
+            inputMap = {
+              "https://input-output-hk.github.io/cardano-haskell-packages" = CHaP;
+            };
+            shell.tools = {
+              cabal = {};
+              hlint = {};
+              hpack = {};
+              haskell-language-server = {};
+            };
+          };
+        })
+      ];
+    pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
+    in pkgs.hello-plutarch.flake {});
 }
