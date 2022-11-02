@@ -15,47 +15,25 @@ import Plutarch.Api.V1.Contexts (PScriptContext)
 import Plutarch.Api.V1.Scripts (PRedeemer, PDatum)
 import Plutarch.Api.V1 (PCurrencySymbol, PTokenName, PValue, PPOSIXTime)
 import PlutusLedgerApi.V1 (Script)
-import Plutarch.Api.V2 (KeyGuarantees (..), AmountGuarantees (..))
-
-alwaysSucceeds :: Term s (PAsData PDatum :--> PAsData PRedeemer :--> PAsData PScriptContext :--> PUnit)
-alwaysSucceeds = plam $ \datm redm ctx -> pconstant ()
+import Plutarch.Api.V2 (PPubKeyHash, KeyGuarantees (..), AmountGuarantees (..))
 
 -- An empty Plutarch record
 type PEmptyRec s = Term s (PDataRecord '[  ])
 
 data PLotteryRedeemer (s :: S)
   = Initialise (PEmptyRec s)
-  | Bid (PEmptyRec s)
-  | Reveal (PEmptyRec s)
-  | Compute (PEmptyRec s)
-  | Claim (PEmptyRec s)
-  | Restart (PEmptyRec s)
+  | Play (PEmptyRec s)
+  | Resolve (Term s (PDataRecord '[ "_0" ':= PString ]))
   deriving stock (Generic)
   deriving anyclass (PlutusType, PIsData)
 instance DerivePlutusType (PLotteryRedeemer) where type DPTStrat _ = PlutusTypeData
 
-type MainMode =
-  PDataRecord
-    '[ "secret" ':= PString -- ^ Either hash or clear
-     , "deadlineBid" ':= PPOSIXTime
-     , "bidValue" ':= PValue 'Sorted 'Positive
-     , "currency" ':= PCurrencySymbol
-     -- Only useful from phase 2 onwards
-     , "deadlineCompute" ':= PPOSIXTime
-     , "deadlineClaim" ':= PPOSIXTime
-     , "totalScore" ':= PInteger ]
-
-type CertificateMode =
-  PDataRecord
-    '[ "mainLottery" ':= PTokenName -- ^ The NFT of the associated lottery
-     , "guessOrScore" ':= PEither PString PInteger
-     -- ^ REVIEW: The expected type is always known, could we get rid
-     -- of the constructors (union type-ish)
-     ]
-
-data PLotteryDatum s
-  = Main ( Term s MainMode )
-  | Certificate ( Term s CertificateMode )
+data PLotteryDatum (s :: S) = PLotteryDatum (Term s (PDataRecord
+        '[ "secretHash" ':= PString
+         , "deadline" ':= PPOSIXTime
+         , "valueToPlay" ':= PValue 'Sorted 'Positive
+         , "players" ':= PList (PBuiltinPair PPubKeyHash PString) ]
+        ))
   deriving stock (Generic)
   deriving anyclass (PlutusType, PIsData)
 instance DerivePlutusType (PLotteryDatum) where type DPTStrat _ = PlutusTypeData
