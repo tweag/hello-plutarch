@@ -32,5 +32,9 @@
         })
       ];
     pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
-    in pkgs.hello-plutarch.flake {});
+    flake = pkgs.hello-plutarch.flake {};
+    in flake //
+    {
+      packages.default = flake.packages."hello-plutarch:exe:hello-plutarch";
+    });
 }
