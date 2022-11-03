@@ -73,6 +73,10 @@ package plutarch
 allow-newer:
   , base
 
+constraints:
+  -- cardano-crypto-class-2.0.0.1 needs
+  vector < 0.13
+
 -- We never, ever, want this.
 write-ghc-environment-files: never
 
