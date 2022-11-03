@@ -2,8 +2,6 @@
 
 module Lib where
 
-import qualified GHC.Generics as GHC
-
 import Plutarch.Prelude
 import Plutarch.Api.V2.Contexts (PScriptContext)
 import Plutarch.Api.V1.Scripts (PRedeemer, PDatum)
