@@ -74,7 +74,8 @@ allow-newer:
   , base
 
 constraints:
-  -- cardano-crypto-class-2.0.0.1 needs
+  -- `cardano-crypto-class-2.0.0.1` needs `vector` < 0.13
+  -- cf https://github.com/input-output-hk/nothunks/issues/17
   vector < 0.13
 
 -- We never, ever, want this.
