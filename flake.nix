@@ -3,12 +3,13 @@
     haskellNix.url = "github:input-output-hk/haskell.nix";
     nixpkgs.follows = "haskellNix/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    # See https://input-output-hk.github.io/cardano-haskell-packages/
+    ## See https://input-output-hk.github.io/cardano-haskell-packages/
     CHaP = {
       url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
       flake = false;
     };
   };
+
   outputs = { self, haskellNix, nixpkgs, flake-utils, CHaP }:
   flake-utils.lib.eachSystem [ "x86_64-linux" ](system:
     let
