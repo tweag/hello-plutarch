@@ -1,0 +1,67 @@
+---
+
+name: haskell.nix
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+
+jobs:
+
+  setup-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3.1.0
+      - name: Install & Cache Nix Dependencies
+        uses: mtoohey31/cache-flake-attrs@v2.0.0
+        with:
+          key: ${{runner.os}}-nix-${{hashFiles('./flake.lock', './flake.nix')}}
+
+  build-with-cabal:
+    needs: setup-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3.1.0
+      - name: Get Cached Nix Dependencies
+        uses: mtoohey31/cache-flake-attrs@v2.0.0
+        with:
+          key: ${{runner.os}}-nix-${{hashFiles('./flake.lock', './flake.nix')}}
+      - name: Build With Cabal
+        run: |
+          nix develop \
+              --extra-experimental-features nix-command \
+              --extra-experimental-features flakes \
+              --command cabal build
+      - name: Run With Cabal
+        run: |
+          nix develop \
+              --extra-experimental-features nix-command \
+              --extra-experimental-features flakes \
+              --command cabal run
+
+  build-with-nix:
+    needs: setup-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3.1.0
+      - name: Get Cached Nix Dependencies
+        uses: mtoohey31/cache-flake-attrs@v2.0.0
+        with:
+          key: ${{runner.os}}-nix-${{hashFiles('./flake.lock', './flake.nix')}}
+      - name: Build With Nix
+        run: |
+          nix build \
+              --extra-experimental-features nix-command \
+              --extra-experimental-features flakes
+      - name: Run With Nix
+        run: |
+          nix run \
+              --extra-experimental-features nix-command \
+              --extra-experimental-features flakes
