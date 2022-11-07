@@ -30,7 +30,9 @@ jobs:
         run: nix develop --command true
 
       - name: Build Cabal Dependencies
-        run: nix develop --command cabal build --only-dependencies
+        run: |
+          nix develop --command cabal update
+          nix develop --command cabal build --only-dependencies
 
       - name: Build With Cabal
         run: nix develop --command cabal build
