@@ -1,0 +1,47 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.7.
+--
+-- see: https://github.com/sol/hpack
+
+name:           hello-plutarch
+version:        0.0.1
+build-type:     Simple
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_hello_plutarch
+  hs-source-dirs:
+      src
+  build-depends:
+      base
+    , bytestring
+    , data-default
+    , either
+    , plutarch
+    , plutus-core
+    , plutus-ledger-api
+    , plutus-tx
+    , text
+  default-language: Haskell2010
+
+executable hello-plutarch
+  main-is: Main.hs
+  other-modules:
+      Paths_hello_plutarch
+  hs-source-dirs:
+      exe
+  build-depends:
+      base
+    , bytestring
+    , data-default
+    , either
+    , hello-plutarch
+    , plutarch
+    , plutus-core
+    , plutus-ledger-api
+    , plutus-tx
+    , text
+  default-language: Haskell2010
