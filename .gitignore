@@ -7,5 +7,4 @@ tmp/
 /.envrc
 /.direnv
 /dist-newstyle
-/*.cabal
 result
