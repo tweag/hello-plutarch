@@ -21,8 +21,8 @@ jobs:
         uses: cachix/install-nix-action@v17
         with:
           extra_nix_config: |
-            substituters = https://cache.iog.io
-            trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
+            extra-substituters = https://cache.iog.io
+            extra-trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
       - name: Install Dependencies
         run: nix develop --command true
       - name: Build With Cabal
@@ -39,8 +39,8 @@ jobs:
         uses: cachix/install-nix-action@v17
         with:
           extra_nix_config: |
-            substituters = https://cache.iog.io
-            trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
+            extra-substituters = https://cache.iog.io
+            extra-trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
       - name: Install Dependencies
         run: nix develop --command true
       - name: Build With Nix
