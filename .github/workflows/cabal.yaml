@@ -27,7 +27,8 @@ jobs:
 
       - name: Setup Cabal Flake
         run: |
-          mv .github/environments/flake.* .
+          cp .github/environments/cabal-flake.nix  flake.nix
+          cp .github/environments/cabal-flake.lock flake.lock
 
       - name: Install Nix Dependencies
         run: nix develop --command true
