@@ -1,0 +1,42 @@
+---
+
+name: cabal
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3.1.0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+        with:
+          extra_nix_config: |
+            extra-substituters = https://cache.iog.io
+            extra-trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
+
+      - name: Setup Cabal Flake
+        run: |
+          mv .github/environments/flake.* .
+
+      - name: Install Nix Dependencies
+        run: nix develop --command true
+
+      - name: Build Cabal Dependencies
+        run: nix develop --command cabal build --only-dependencies
+
+      - name: Build With Cabal
+        run: nix develop --command cabal build
+
+      - name: Run With Cabal
+        run: nix develop --command cabal run
