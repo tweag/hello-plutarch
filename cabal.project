@@ -29,6 +29,13 @@ source-repository-package
   tag: v1.3.0
   --sha256: 1wbzzdkrf4n1r44iddnw501imd0xq1kkn25sjjck9z55xyw3286g
 
+source-repository-package
+  type: git
+  location: https://github.com/plutonomicon/plutarch-plutus
+  tag: v1.3.0
+  subdir: plutarch-extra
+  --sha256: 1wbzzdkrf4n1r44iddnw501imd0xq1kkn25sjjck9z55xyw3286g
+
 -- Plutarch builds with `-Werror` but does have warnings. We disable this
 -- behaviour locally by making warnings warnings again.
 --
