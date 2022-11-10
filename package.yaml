@@ -13,6 +13,7 @@ dependencies:
   - plutus-core
   - plutus-ledger-api
   - plutarch
+  - plutarch-extra
 
 library:
   source-dirs: src
