@@ -8,12 +8,8 @@ To start a new project based on Hello Plutarch, you need either
 
 ## Compile with nix
 
-To avoid building components (and hence speed up compile time),
-you must set up your nix cache properly, see
-[here](https://input-output-hk.github.io/haskell.nix/tutorials/getting-started.html#setting-up-the-binary-cache)
-and [there](https://github.com/input-output-hk/plutus#how-to-set-up-the-iohk-binary-caches).
-
-To test the setup,
+_You must answer positively to the questions prompted by the following nix
+command to avoid compiling GHC several times._
 
 ```sh
 $ nix run

@@ -41,7 +41,7 @@
     nixConfig = {
       ## Setup IOG caches, see
       ## https://input-output-hk.github.io/haskell.nix/tutorials/getting-started.html#setting-up-the-binary-cache
-      extra-substituters = ["https://cache.iog.io"];
+      extra-trusted-substituters = ["https://cache.iog.io"];
       extra-trusted-public-keys = ["hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
       allow-import-from-derivation = "true";
     };
