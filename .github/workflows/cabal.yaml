@@ -22,10 +22,10 @@ jobs:
         uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: |
+            ## NOTE: This substituter is probably not needed considering Cabal's
+            ## simple flake. It is here for consistency with `haskell.nix.yaml`.
             extra-substituters = https://cache.iog.io
             extra-trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
-          ## NOTE: This substituter is probably not needed considering Cabal's
-          ## simple flake. It is here for consistency with `haskell.nix.yaml`.
 
       - name: Setup Cabal Flake
         run: |
