@@ -29,6 +29,9 @@ jobs:
           libffi=$(find /usr/lib -name libffi.so)
           sudo ln -s "$libffi" "$libffi".6
 
+      - name: DEBUG
+        run: hpack --version
+
       - name: Run hpack
         run: hpack
 
