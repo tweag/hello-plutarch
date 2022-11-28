@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3.1.0
 
       - name: Install hpack
-        run: apt install -yq hpack
+        run: sudo apt install -yq hpack
 
       - name: Run hpack
         run: hpack
