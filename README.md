@@ -11,7 +11,7 @@ To start a new project based on Hello Plutarch, you need either
 _You must answer positively to the questions prompted by the following nix
 command to avoid compiling GHC several times._
 
-```sh
+```console
 $ nix run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
@@ -24,7 +24,7 @@ Additional requirements:
 - libsodium
 - secp256k1
 
-```sh
+```console
 $ cabal run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
