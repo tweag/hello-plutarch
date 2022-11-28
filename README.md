@@ -4,19 +4,19 @@ Hello Plutarch helps you writing projects in Haskell that use
 [Plutarch](https://github.com/Plutonomicon/plutarch-plutus) libraries.
 
 To start a new project based on Hello Plutarch, you need either
-[nix](https://nixos.org) or [cabal](https://www.haskell.org/cabal/).
+[Nix](https://nixos.org) or [Cabal](https://www.haskell.org/cabal/).
 
-## Compile with nix
+## Compile with Nix
 
-_You must answer positively to the questions prompted by the following nix
+_You must answer positively to the questions prompted by the following Nix
 command to avoid compiling GHC several times._
 
-```sh
+```console
 $ nix run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
 
-## Compile with cabal
+## Compile with Cabal
 
 Additional requirements:
 - ghc (>= 9.2)
@@ -24,7 +24,7 @@ Additional requirements:
 - libsodium
 - secp256k1
 
-```sh
+```console
 $ cabal run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
