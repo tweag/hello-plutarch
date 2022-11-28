@@ -22,11 +22,12 @@ jobs:
       - name: Install hpack
         run: |
           sudo apt install -yq hpack
-          libffi=$(find /usr/lib -name libffi.so)
-          sudo ln -s "$libffi" "$libffi".6
-          ## ^ These two lines are here to make `libffi.so.6` available on the
+          ## The following lines are here to make `libffi.so.6` available on the
           ## system. `libffi` has an extremely stable interface, and therefore
           ## it is not harmful to simply link it to later versions.
+          printf 'Manually setting up `libffi.so.6`...\n'
+          libffi=$(find /usr/lib -name libffi.so)
+          sudo ln -s "$libffi" "$libffi".6
 
       - name: Run hpack
         run: hpack
