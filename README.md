@@ -1,30 +1,13 @@
-# [Hello Plutarch](https://github.com/tweag/hello-plutarch)
+# [Hello Plutarch](https://github.com/tweag/hello-plutarch?ref=flake)
 
 Hello Plutarch helps you writing projects in Haskell that use
 [Plutarch](https://github.com/Plutonomicon/plutarch-plutus) libraries.
 
-To start a new project based on Hello Plutarch, you need either
-[Nix](https://nixos.org) or [Cabal](https://www.haskell.org/cabal/).
+To start a new project based on Hello Plutarch, you need
+[Nix](https://nixos.org).
 
-## Compile with Nix
-
-_You must answer positively to the questions prompted by the following Nix
-command to avoid compiling GHC several times._
-
+To setup a new repository, create a new directory and
 ```console
-$ nix run
-(program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
-```
-
-## Compile with Cabal
-
-Additional requirements:
-- ghc (>= 9.2)
-- pkg-config
-- libsodium
-- secp256k1
-
-```console
-$ cabal run
-(program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
+$ nix flake init -t github:tweag/hello-plutarch?ref=flake
+[...]
 ```
