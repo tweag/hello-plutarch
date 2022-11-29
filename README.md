@@ -28,3 +28,11 @@ Additional requirements:
 $ cabal run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
+
+## Use flake templates
+
+The repository also provides a Nix flake template.
+A fresh repository can be setup with
+```console
+$ nix flake init -t github:tweag/hello-plutarch
+```
