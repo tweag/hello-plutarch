@@ -58,8 +58,11 @@ jobs:
           ## Erase the `template` directory with what has been prepared before.
           rm -R ./template
           cp -R "$tmp" ./template
-          ## Add and commit this change to the `template` branch.
-          git add ./template
-          git commit --message="$(cat "$COMMIT_MESSAGE_FILE")"
-          git push origin niols/test-template
-          ## ^^^ FIXME: change when done testing
+          ## Add and commit this to the `template` branch if it brought any kind
+          ## of change.
+          if [ -n "$(git status --porcelain)" ]; then
+            git add ./template
+            git commit --message="$(cat "$COMMIT_MESSAGE_FILE")"
+            git push origin niols/test-template
+            ## ^^^ FIXME: change when done testing
+          fi
