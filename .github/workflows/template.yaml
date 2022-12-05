@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-  ## ^^^ FIXME: remove later
 
 jobs:
 
@@ -24,8 +22,8 @@ jobs:
 
       - name: Create Temporary Directory
         run: |
-          echo 'tmp=${{ runner.temp }}/template' >> $GITHUB_ENV
-          mkdir ${{ runner.temp }}/template
+          echo 'tmp=${{ runner.temp }}/template' >> "$GITHUB_ENV"
+          mkdir '${{ runner.temp }}'/template
 
       - name: Prepare Template
         run: |
@@ -36,20 +34,28 @@ jobs:
             -mindepth 1 -maxdepth 1                                   \
             '('                                                       \
                 '(' -name .git -o -name .github ')' -prune            \
-                -o -exec cp -R '{}' $tmp/ ';'                         \
+                -o -exec cp -R '{}' "$tmp"/ ';'                       \
             ')'
 
-      - name: [TEST] Create a stupid commit message
+      - name: Create Commit Message
         run: |
-          echo "COMMIT_MESSAGE=\"C'est un commit message !\"" >> $GITHUB_ENV
+          ## We could go for `git commit --message="Follow [...]"` but we are
+          ## worried that commit messages might contain single or double quotes.
+          echo 'COMMIT_MESSAGE_FILE=${{ runner.temp }}/commit-message' >> "$GITHUB_ENV"
+          cat > '${{ runner.temp }}'/commit-message <<\EOF
+          Follow ${{ github.sha }}: ${{ github.event.head.message }}
+          EOF
 
       - name: Publish to Branch `template`
         run: |
+          ## We act as the GitHub Actions bot on the `template` branch.
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout niols/test-template
-          rm -Rf ./template
-          cp -R $tmp ./template
+          git checkout template
+          ## Erase the `template` directory with what has been prepared before.
+          rm -R ./template
+          cp -R "$tmp" ./template
+          ## Add and commit this change to the `template` branch.
           git add ./template
-          git commit --message='Follow ${{ github.sha }}: ${{ env.COMMIT_MESSAGE }}'
-          git push origin niols/test-template
+          git commit --message="$(cat "$COMMIT_MESSAGE_FILE")"
+          git push origin template
