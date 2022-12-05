@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-      - workflow-sync-main-template
-      ## ^^^ FIXME: remove when done testing
 
 jobs:
 
@@ -53,8 +51,7 @@ jobs:
           ## We act as the GitHub Actions bot on the `template` branch.
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout niols/test-template
-          ## ^^^ FIXME: change when done testing
+          git checkout template
           ## Erase the `template` directory with what has been prepared before.
           rm -R ./template
           cp -R "$tmp" ./template
@@ -63,6 +60,5 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add ./template
             git commit --message="$(cat "$COMMIT_MESSAGE_FILE")"
-            git push origin niols/test-template
-            ## ^^^ FIXME: change when done testing
+            git push origin template
           fi
