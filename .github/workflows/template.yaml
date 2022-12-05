@@ -31,7 +31,7 @@ jobs:
             -mindepth 1 -maxdepth 1                                   \
             '('                                                       \
                 '(' -name .git -o -name .github ')' -prune            \
-                -o -exec cp -R '{}' $tmp/                             \
+                -o -exec cp -R '{}' $tmp/ ';'                         \
             ')'
 
       - name: Publish to Branch `template`
