@@ -1,0 +1,41 @@
+---
+
+name: template
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  ## ^^^ FIXME: remove when done with testing
+
+jobs:
+
+  sync-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3.1.0
+
+      - name: Create Temporary Directory
+        run: |
+          echo 'tmp=${{ runner.temp }}/template' >> $GITHUB_ENV
+          mkdir ${{ runner.temp }}/template
+
+      - name: Prepare Template
+        run: |
+          cp -R * $tmp/
+          rm -R $tmp/.git $tmp/.github
+
+      - name: Publish to Branch `template`
+        run: |
+          git config user.name 'github-actions[bot]
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout niols/test-template
+          ## ^^^ FIXME: change back to `template` when done with testing
+          rm -Rf ./template
+          cp -R $tmp ./template
+          git add ./template
+          git commit --message='Follow ${{ github.sha }}: ${{ github.event.head.message }}'
+          git push origin niols/test-template
+          ## ^^^ FIXME: change back to `template` when done with testing
