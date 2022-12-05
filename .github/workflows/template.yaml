@@ -37,6 +37,10 @@ jobs:
                 -o -exec cp -R '{}' $tmp/ ';'                         \
             ')'
 
+      - name: [TEST] Create a stupid commit message
+        run: |
+          echo "COMMIT_MESSAGE=\"C'est un commit message !\"" >> $GITHUB_ENV
+
       - name: Publish to Branch `template`
         run: |
           git config user.name 'github-actions[bot]'
@@ -45,5 +49,5 @@ jobs:
           rm -Rf ./template
           cp -R $tmp ./template
           git add ./template
-          git commit --message='Follow ${{ github.sha }}: ${{ github.event.head.message }}'
+          git commit --message='Follow ${{ github.sha }}: ${{ env.COMMIT_MESSAGE }}'
           git push origin template
