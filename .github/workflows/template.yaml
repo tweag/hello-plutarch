@@ -47,9 +47,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout template
+          git checkout niols/test-template
           rm -Rf ./template
           cp -R $tmp ./template
           git add ./template
           git commit --message='Follow ${{ github.sha }}: ${{ env.COMMIT_MESSAGE }}'
-          git push origin template
+          git push origin niols/test-template
