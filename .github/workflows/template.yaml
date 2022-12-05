@@ -24,8 +24,15 @@ jobs:
 
       - name: Prepare Template
         run: |
-          cp -R * .* $tmp/
-          rm -R $tmp/.git $tmp/.github
+          ## Find everything in the current directory at depth exactly 1. If
+          ## they are called `.git` or `.github`, stop exploring them right
+          ## away. Otherwise, copy them to `$tmp/`.
+          find .                                                      \
+            -mindepth 1 -maxdepth 1                                   \
+            '('                                                       \
+                '(' -name .git -o -name .github ')' -prune            \
+                -o -exec cp -R '{}' $tmp/                             \
+            ')'
 
       - name: Publish to Branch `template`
         run: |
