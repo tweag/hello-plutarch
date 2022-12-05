@@ -28,3 +28,11 @@ Additional requirements:
 $ cabal run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
+
+## Nix template
+
+You can also use Nix to initialise a new Plutarch project with
+
+```console
+$ nix flake init -t github:tweag/hello-plutarch/template
+```
