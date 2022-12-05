@@ -16,10 +16,11 @@ jobs:
     steps:
       - name: Clone Repository
         uses: actions/checkout@v3.1.0
-        fetch-depth: 0
-        ## A `fetch-depth` of `0` indicates all history for all branches and
-        ## tags. This is a fairly brutal way to make sure that we also obtain
-        ## the `template` branch.
+        with:
+          fetch-depth: 0
+          ## A `fetch-depth` of `0` indicates all history for all branches and
+          ## tags. This is a fairly brutal way to make sure that we also obtain
+          ## the `template` branch.
 
       - name: Create Temporary Directory
         run: |
