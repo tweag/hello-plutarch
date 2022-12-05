@@ -45,7 +45,7 @@ jobs:
           ## worried that commit messages might contain single or double quotes.
           echo 'COMMIT_MESSAGE_FILE=${{ runner.temp }}/commit-message' >> "$GITHUB_ENV"
           cat > '${{ runner.temp }}'/commit-message <<\EOF
-          Follow ${{ github.sha }}: ${{ github.event.head.message }}
+          Follow ${{ github.sha }}: ${{ github.event.head_commit.message }}
           EOF
 
       - name: Publish to Branch `template`
