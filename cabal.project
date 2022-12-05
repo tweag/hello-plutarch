@@ -60,3 +60,5 @@ benchmarks: true
 
 -- The only sensible test display option.
 test-show-details: streaming
+
+-- BONJOUR
