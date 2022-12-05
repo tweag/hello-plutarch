@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-  ## ^^^ FIXME: remove when done with testing
 
 jobs:
 
@@ -43,11 +41,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout niols/test-template
-          ## ^^^ FIXME: change back to `template` when done with testing
+          git checkout template
           rm -Rf ./template
           cp -R $tmp ./template
           git add ./template
           git commit --message='Follow ${{ github.sha }}: ${{ github.event.head.message }}'
-          git push origin niols/test-template
-          ## ^^^ FIXME: change back to `template` when done with testing
+          git push origin template
