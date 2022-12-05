@@ -28,4 +28,3 @@ Additional requirements:
 $ cabal run
 (program 1.0.0 (\i0 -> \i0 -> \i0 -> ()))
 ```
-hahahaha
