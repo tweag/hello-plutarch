@@ -39,8 +39,10 @@
     });
 
     nixConfig = {
-      ## Setup IOG caches, see
+      ## Setup IOG and Plutarch caches. For IOG, see
       ## https://input-output-hk.github.io/haskell.nix/tutorials/getting-started.html#setting-up-the-binary-cache
+      ## For Plutarch, see
+      ## https://github.com/Plutonomicon/plutarch-plutus/blob/9b83892057f2aaaed76e3af6193ad1ae242244cc/flake.nix 
       extra-trusted-substituters = ["https://cache.iog.io" "https://public-plutonomicon.cachix.org"];
       extra-trusted-public-keys = ["hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "public-plutonomicon.cachix.org-1:3AKJMhCLn32gri1drGuaZmFrmnue+KkKrhhubQk/CWc="];
       allow-import-from-derivation = "true";
