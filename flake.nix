@@ -1,6 +1,7 @@
 {
   inputs = {
-    haskellNix.url = "github:input-output-hk/haskell.nix";
+    ## This version of haskell.nix allows to *copy* GHC 9.2.4
+    haskellNix.url = "github:input-output-hk/haskell.nix?ref=0.0.68";
     nixpkgs.follows = "haskellNix/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     ## See https://input-output-hk.github.io/cardano-haskell-packages/
@@ -11,7 +12,7 @@
   };
 
   outputs = { self, haskellNix, nixpkgs, flake-utils, CHaP }:
-  flake-utils.lib.eachSystem [ "x86_64-linux" ](system:
+  flake-utils.lib.eachDefaultSystem (system:
     let
       overlays = [ haskellNix.overlay
       (final: prev: {
