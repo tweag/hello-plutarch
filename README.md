@@ -36,3 +36,8 @@ You can also use Nix to initialise a new Plutarch project with
 ```console
 $ nix flake init -t github:tweag/hello-plutarch/template
 ```
+
+## License
+
+This template is licensed under the MIT license.
+See the [LICENSE](LICENSE) file for more information.
